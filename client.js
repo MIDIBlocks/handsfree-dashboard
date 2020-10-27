@@ -37,16 +37,6 @@ handsfree.use({
    * Sends a message to the socket
    */
   sendMessage: throttle(function () {
-    // console.log(JSON.stringify({
-    //   handsfree: true,
-    //   action: 'updateCursor',
-    //   cursor: lastPose.cursor,
-    //   face: {
-    //     rotationX: lastPose.face.rotationX,
-    //     rotationY: lastPose.face.rotationY,
-    //     rotationZ: lastPose.face.rotationZ
-    //   }
-    // }))
     lastPose && socketConnected && socket && socket.send(JSON.stringify({
       handsfree: true,
       action: 'updateCursor',
@@ -57,7 +47,7 @@ handsfree.use({
         rotationZ: lastPose.face.rotationZ
       }
     }))
-  }, 400)
+  }, 0)
 })
 
 /**
@@ -122,6 +112,7 @@ window.addEventListener('keydown', ({key}) => {
   if (key === 'Escape') {
     socket.close()
     socketConnected = false
+    document.querySelector('#connected-state').checked = false
   }
 })
 
