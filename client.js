@@ -12,39 +12,32 @@
  */
 
 // Here we instantiate handsfree with debug mode on (visible webcam feed with wireframe overlay)
-const handsfree = new Handsfree({debug: true})
+const handsfree = new Handsfree({weboji: true})
 
 /**
  * Create a new Handsfree.js plugin
  * - onFrame(poses) gets called once per webcam frame
  */
 let lastPose = null
-handsfree.use({
-  name: 'socketConnector',
-
+handsfree.use('socketConnector', {
   /**
    * Called once per webcam frame
    * @param {Array} poses List of pose objects, one per tracked user (if `settings.maxPoses` is set)
    */
-  onFrame (poses) {
-    poses.forEach(pose => {
-      lastPose = pose
-      this.sendMessage(pose)
-    })
+  onFrame ({weboji}) {
+    lastPose = weboji
+    this.sendMessage(weboji)
   },
 
   /**
    * Sends a message to the socket
    */
-  sendMessage: throttle(function () {
+  sendMessage: throttle(function (weboji) {
     lastPose && socketConnected && socket && socket.send(JSON.stringify({
       handsfree: true,
-      action: 'updateCursor',
-      cursor: lastPose.cursor,
-      face: {
-        rotationX: lastPose.face.rotationX,
-        rotationY: lastPose.face.rotationY,
-        rotationZ: lastPose.face.rotationZ
+      action: 'move',
+      data: {
+        ...weboji[0]
       }
     }))
   }, 0)
@@ -116,5 +109,12 @@ window.addEventListener('keydown', ({key}) => {
   }
 })
 
-/* globals
-Handsfree */
+/**
+ * Override faceclick to send click
+ */
+handsfree.plugin.faceClick.click = function (weboji) {
+  lastPose && socketConnected && socket && socket.send(JSON.stringify({
+    handsfree: true,
+    action: 'click'
+  }))
+}

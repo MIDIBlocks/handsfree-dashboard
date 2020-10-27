@@ -4,6 +4,7 @@
   <link rel="icon" href="https://cdn.glitch.com/731c39be-b4a9-4587-8d7e-258649169d62%2Ffavicon.png?1548972707186">
   <link rel="stylesheet" type="text/css" href="./client.css">
   <link rel="stylesheet" type="text/css" href="https://button.glitch.me/css/glitch.css">
+  <link rel="stylesheet" type="text/css" href="./node_modules/handsfree/dist/assets/handsfree.css">
   <script src="https://button.glitch.me/button.js" data-style="glitch"></script>
 </head>
 <body>
@@ -13,7 +14,7 @@
   <div style="width: 500px; margin: auto">
     <div style="margin-bottom: 20px">
       <img src="https://cdn.glitch.com/731c39be-b4a9-4587-8d7e-258649169d62%2Ffavicon.png?1548972707186" height="100px">
-      <h1>Handsfree Dashboard <small>v.<span id="version"></span></small></h1>
+      <h1>Handsfree Dashboard <small>v.<span id="version">7.0.7</span></small></h1>
       <input id="websocket" placeholder="ws:myserver.com:8081/path/to/endpoint" value="ws:localhost:8081">
       <input id="connected-state" class="checkbox-connect" type="checkbox" onchange="toggleWebsocket()">
       <div class="handsfree-debug-wrap"></div>
@@ -29,6 +30,7 @@
   
   <!-- Handsfree.js adds classes to the body, so it's best to load it inside of <body> -->
   <!-- If you need to load Handsfree.js in the <head>, use the `defer` prop: @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script#attr-defer -->
-  <script src="https://unpkg.com/handsfree@<4.2.0/dist/handsfree.js"></script>
+  <!-- <script src="https://unpkg.com/handsfree@<4.2.0/dist/handsfree.js"></script> -->
+  <script src="./node_modules/handsfree/dist/handsfree.js"></script>
   <script src="./client.js"></script>
 </body>
