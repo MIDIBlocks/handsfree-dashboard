@@ -1,0 +1,22 @@
+{
+  "name": "handsfree-dashboard",
+  "version": "1.0.0",
+  "description": "Used to send Handsfree.js pose information to desktops (via handsfree-desktop), robots (via handsfree-ur5), and more",
+  "main": "client.js",
+  "scripts": {
+    "start": "http-server -c-1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/midiblocks/handsfree-dashboard.git"
+  },
+  "author": "Oz Ramos <midiblocks@gmail.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/midiblocks/handsfree-dashboard/issues"
+  },
+  "homepage": "https://github.com/midiblocks/handsfree-dashboard#readme",
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  }
+}

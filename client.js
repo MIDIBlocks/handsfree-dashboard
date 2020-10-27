@@ -7,8 +7,8 @@
  *          \/\  ####  /\/
  *              \`##' /
  *
- *  🔮 https://github/labofoz/handsfree-ur5
- *  🧙‍ https://twitter.com/labofoz
+ *  🔮 https://github/midiblocks/handsfree-dashboard
+ *  🧙‍ https://twitter.com/midiblocks
  */
 
 // Here we instantiate handsfree with debug mode on (visible webcam feed with wireframe overlay)
@@ -83,11 +83,11 @@ function toggleWebsocket () {
     socket = new WebSocket($socketURI.value)
     socket.onopen = () => {
       socketConnected = true
-      // socket.send('{"handsfree": true, "connected": true}')
-      console.log('CONNECTED')
+      console.log('connected...')
     }
   } else {
     socketConnected = false
+    console.log('...disconnected')
   }
 }
 
@@ -113,6 +113,16 @@ function throttle (callback, limit) {
  */
 handsfree.on('ready', () => {
   document.querySelector('#version').innerHTML = Handsfree.version
+})
+
+/**
+ * Close connection
+ */
+window.addEventListener('keydown', ({key}) => {
+  if (key === 'Escape') {
+    socket.close()
+    socketConnected = false
+  }
 })
 
 /* globals
